@@ -9,7 +9,7 @@ import java.util.Optional;
 
 //@CrossOrigin(origins = "")
 
-//@RequestMapping("/")
+@RequestMapping("/")
 @RestController
 public class controllerClass {
 
@@ -19,6 +19,8 @@ public class controllerClass {
     public controllerClass(serviceClass service){
         serviceClassObj = service;
     }
+
+    @GetMapping("")
 
     @PostMapping("/create")
     public String addQuery(@RequestBody userQueryData obj){
