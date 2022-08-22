@@ -9,7 +9,7 @@ import java.util.Optional;
 
 //@CrossOrigin(origins = "")
 
-@RequestMapping("/")
+//@RequestMapping("/")
 @RestController
 public class controllerClass {
 
