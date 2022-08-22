@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.annotation.Generated;
+import java.util.List;
 
 @Document(collection = "queryGiven")
 public class userQueryData {
@@ -16,15 +17,24 @@ public class userQueryData {
     private String problemLink;
     private String userDesc;
     private String givenCode;
+    private List<Integer> comments;
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public List<Integer> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Integer> comments) {
+        this.comments = comments;
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUserDesc() {
         return userDesc;
