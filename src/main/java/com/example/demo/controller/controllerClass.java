@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "")
+@CrossOrigin(origins = "*")
 
 @RestController
 @RequestMapping("/")
@@ -59,7 +59,7 @@ public class controllerClass {
         return serviceClassObj.deleteComment(id, commentId);
     }
 
-    @DeleteMapping("/deletepost/{id}")
+    @DeleteMapping ("/deletepost/{id}")
     public String deleteData(@PathVariable("id") int id){
         return serviceClassObj.deleteData(id);
     }
