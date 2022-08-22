@@ -10,6 +10,7 @@ import java.util.Optional;
 //@CrossOrigin(origins = "")
 
 @RestController
+@RequestMapping("/")
 public class controllerClass {
 
     @Autowired
