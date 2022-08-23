@@ -93,7 +93,7 @@ public class serviceClass {
         newObj.setGivenCode(obj.getGivenCode());
         newObj.setProblemLink(obj.getProblemLink());
         userQueryDataInterfaceObj.save(newObj);
-        return "Success";
+        return String.valueOf(newObj.getId());
     }
 
     public Optional<userQueryData> getUserQueryData(int id){
