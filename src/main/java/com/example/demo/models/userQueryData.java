@@ -17,18 +17,9 @@ public class userQueryData {
     private String problemLink;
     private String userDesc;
     private String givenCode;
-    private List<Integer> comments;
-
 
     public void setId(int id) {
         this.id = id;
-    }
-    public List<Integer> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Integer> comments) {
-        this.comments = comments;
     }
 
     public int getId() {

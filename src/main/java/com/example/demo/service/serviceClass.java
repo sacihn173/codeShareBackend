@@ -24,15 +24,11 @@ public class serviceClass {
     private commentStructInterface commentStructInterfaceObj;
 
     public String addComment(commentStruct obj, int id){
-        userQueryData dataObj = userQueryDataInterfaceObj.findById(id).orElse(null);
-        List<Integer> commentIds = dataObj.getComments();
+
         largestKey largestKeyObj = largestKeyInterfaceObj.findById(1).orElse(null);
         int commentId = largestKeyObj.getCommentValue();
         commentStruct newComment = new commentStruct();
         newComment.setCommentId(commentId);
-        commentIds.add(commentId);
-        dataObj.setComments(commentIds);
-        userQueryDataInterfaceObj.save(dataObj);
         largestKeyObj.setCommentValue(commentId + 1);
         largestKeyInterfaceObj.save(largestKeyObj);
 
@@ -45,18 +41,15 @@ public class serviceClass {
 
     public String deleteData(int id){
         userQueryDataInterfaceObj.deleteById(id);
+        // delete all comments bonded to this postId
+        List<commentStruct> comments = commentStructInterfaceObj.findByPostId(id);
+        for(int i = 0; i < comments.size(); i++){
+            commentStructInterfaceObj.deleteById(comments.get(i).getCommentId());
+        }
         return "deleted";
     }
 
     public String deleteComment(int id, int commentId){
-        userQueryData dataObj = userQueryDataInterfaceObj.findById(id).orElse(null);
-        for(int i = 0; i < dataObj.getComments().size(); i++){
-            if(dataObj.getComments().get(i) == commentId){
-                dataObj.getComments().remove(i);
-                userQueryDataInterfaceObj.save(dataObj);
-                break;
-            }
-        }
         commentStructInterfaceObj.deleteById(commentId);
         return "success";
     }
@@ -70,16 +63,11 @@ public class serviceClass {
     }
 
     public List<commentStruct> returnComments(int id){
-        List<commentStruct> result = new ArrayList<>();
-        userQueryData posts = userQueryDataInterfaceObj.findById(id).orElse(null);
-        for(int i = 0; i < posts.getComments().size(); i++){
-            result.add(commentStructInterfaceObj.findById(posts.getComments().get(i)).orElse(null));
-        }
-        return result;
+        List<commentStruct> commentFind = commentStructInterfaceObj.findByPostId(id);
+        return commentFind;
     }
 
     public String saveUserQueryData(userQueryData obj){
-        List<Integer> list = new ArrayList<>();
         largestKey lastId = largestKeyInterfaceObj.findById(1).orElse(null);
         int val = lastId.getValue();
         userQueryData newObj = new userQueryData();
@@ -89,7 +77,6 @@ public class serviceClass {
         largestKeyInterfaceObj.save(lastId);
 
         newObj.setUserDesc(obj.getUserDesc());
-        newObj.setComments(list);
         newObj.setGivenCode(obj.getGivenCode());
         newObj.setProblemLink(obj.getProblemLink());
         userQueryDataInterfaceObj.save(newObj);
