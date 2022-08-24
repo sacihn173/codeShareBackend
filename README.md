@@ -1,1 +1,1 @@
-Spring Boot backend for codeShare App
+Spring Boot Backend for ShareDoubt App
