@@ -29,7 +29,7 @@ public class controllerClass {
     }
 
     @PostMapping("/{id}/addcomment")
-    public String addComment(@RequestBody commentStruct obj, @PathVariable("id") int id){
+    public commentStruct addComment(@RequestBody commentStruct obj, @PathVariable("id") int id){
         return serviceClassObj.addComment(obj, id);
     }
 

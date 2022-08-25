@@ -23,7 +23,7 @@ public class serviceClass {
     @Autowired
     private commentStructInterface commentStructInterfaceObj;
 
-    public String addComment(commentStruct obj, int id){
+    public commentStruct addComment(commentStruct obj, int id){
 
         largestKey largestKeyObj = largestKeyInterfaceObj.findById(1).orElse(null);
         int commentId = largestKeyObj.getCommentValue();
@@ -36,7 +36,7 @@ public class serviceClass {
         newComment.setCommentDesc(obj.getCommentDesc());
         newComment.setPostId(id);
         commentStructInterfaceObj.save(newComment);
-        return "success";
+        return newComment;
     }
 
     public String deleteData(int id){
